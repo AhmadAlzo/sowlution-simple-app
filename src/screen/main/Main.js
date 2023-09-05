@@ -35,16 +35,17 @@ const Main = () => {
           // console.log(response)
           let dataTemp = response.data["data"]["items"].slice(0,12).map(e=>e["categories"])
           .map(e=>{
-            let ele = {
-              imgUrl: e[0]["images"][0]["small"],
-              title:e[0]["title"],
-              userId:e[0]["created_at"]+  (Math.random()*100).toString()
+            let ele={}
+            if( "small" in e[0]["images"][0]){
+              ele["imgUrl"]= e[0]["images"][0]["small"],
+              ele["title"]=e[0]["title"],
+              ele["userId"]=e[0]["created_at"]+  (Math.random()*100).toString()
             }
             return(ele)
           })
           setdatafetch(dataTemp)
         } catch (e) {
-          console.error(e);
+          
         } finally {
           setTimeout(() => setLoading(false), 4000)
         }
